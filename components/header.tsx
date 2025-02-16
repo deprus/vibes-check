@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 import { useSession } from "@/lib/auth-client";
 import MainNav from "./main-nav";
-
+import MobileNav from "./mobile-nav";
 export default function Header() {
   const { data: isPending } = useSession();
 
@@ -13,6 +13,7 @@ export default function Header() {
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <div className="flex items-center gap-6">
+          <MobileNav />
           <Link href="/" className="flex items-center">
             <span className="inline-block font-bold text-xl">Vibes-check</span>
           </Link>
