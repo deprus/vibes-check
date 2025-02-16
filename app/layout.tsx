@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Background from "@/components/background";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} font-inter antialiased`}>
         <Background />
+        <Toaster />
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-1 flex container">{children}</main>

@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { useSession } from "@/lib/auth-client";
 import MainNav from "./main-nav";
 import MobileNav from "./mobile-nav";
+import ProfileDropdown from "./profile-dropdown";
 export default function Header() {
-  const { data: isPending } = useSession();
+  const { data: session, isPending } = useSession();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
@@ -20,16 +21,19 @@ export default function Header() {
           <MainNav />
         </div>
         <div className="flex flex-1 items-center justify-end">
-          {!isPending && (
-            <div className="hidden md:flex space-x-2 ml-2">
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/sign-in">Sign In</Link>
-              </Button>
-              <Button asChild size="sm">
-                <Link href="/sign-up">Sign Up</Link>
-              </Button>
-            </div>
-          )}
+          {!isPending &&
+            (session ? (
+              <ProfileDropdown />
+            ) : (
+              <div className="hidden md:flex space-x-2 ml-2">
+                <Button asChild variant="ghost" size="sm">
+                  <Link href="/sign-in">Sign In</Link>
+                </Button>
+                <Button asChild size="sm">
+                  <Link href="/sign-up">Sign Up</Link>
+                </Button>
+              </div>
+            ))}
         </div>
       </div>
     </header>
