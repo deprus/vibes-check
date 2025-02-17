@@ -52,10 +52,14 @@ export default function MobileNav() {
           ))}
           <div className="flex flex-col gap-2 mt-4 pt-4 border-t">
             <Button asChild variant="outline" size="sm">
-              <Link href="/sign-in">Sign In</Link>
+              <Link onClick={() => setIsOpen(false)} href="/sign-in">
+                Sign In
+              </Link>
             </Button>
             <Button asChild size="sm">
-              <Link href="/sign-up">Sign Up</Link>
+              <Link onClick={() => setIsOpen(false)} href="/sign-up">
+                Sign Up
+              </Link>
             </Button>
           </div>
         </nav>
