@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -18,17 +18,25 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-import { signUp } from "@/lib/auth-client";
+import { signUp, useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
+import Loading from "@/components/loading";
 
 export default function SignUpPage() {
-  const router = useRouter();
+  const { data: session, isPending } = useSession();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session && !isPending) {
+      router.replace("/");
+    }
+  }, [session, isPending, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,6 +75,10 @@ export default function SignUpPage() {
       },
     });
   };
+
+  if (isPending || session) {
+    return <Loading />;
+  }
 
   return (
     <div className="container flex items-center justify-center py-4">
