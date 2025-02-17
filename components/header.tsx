@@ -7,6 +7,7 @@ import { useSession } from "@/lib/auth-client";
 import MainNav from "./main-nav";
 import MobileNav from "./mobile-nav";
 import ProfileDropdown from "./profile-dropdown";
+import { Skeleton } from "./ui/skeleton";
 export default function Header() {
   const { data: session, isPending } = useSession();
 
@@ -21,6 +22,7 @@ export default function Header() {
           <MainNav />
         </div>
         <div className="flex flex-1 items-center justify-end">
+          {isPending && <Skeleton className="h-6 w-6 rounded-full" />}
           {!isPending &&
             (session ? (
               <ProfileDropdown />
