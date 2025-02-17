@@ -14,10 +14,12 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { NAV_ITEMS } from "@/config/constants";
+import { useSession } from "@/lib/auth-client";
 
 export default function MobileNav() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session, isPending } = useSession();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -50,18 +52,20 @@ export default function MobileNav() {
               {item.label}
             </Link>
           ))}
-          <div className="flex flex-col gap-2 mt-4 pt-4 border-t">
-            <Button asChild variant="outline" size="sm">
-              <Link onClick={() => setIsOpen(false)} href="/sign-in">
-                Sign In
-              </Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link onClick={() => setIsOpen(false)} href="/sign-up">
-                Sign Up
-              </Link>
-            </Button>
-          </div>
+          {!session && !isPending && (
+            <div className="flex flex-col gap-2 mt-4 pt-4 border-t">
+              <Button asChild variant="outline" size="sm">
+                <Link onClick={() => setIsOpen(false)} href="/sign-in">
+                  Sign In
+                </Link>
+              </Button>
+              <Button asChild size="sm">
+                <Link onClick={() => setIsOpen(false)} href="/sign-up">
+                  Sign Up
+                </Link>
+              </Button>
+            </div>
+          )}
         </nav>
       </SheetContent>
     </Sheet>
