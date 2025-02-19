@@ -12,12 +12,12 @@ export default function Header() {
   const { data: session, isPending } = useSession();
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background">
+    <header className="bg-background sticky top-0 z-40 w-full border-b">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <div className="flex items-center gap-6">
           <MobileNav />
           <Link href="/" className="flex items-center">
-            <span className="inline-block font-bold text-xl">Vibes-check</span>
+            <span className="inline-block text-xl font-bold">Vibes-check</span>
           </Link>
           <MainNav />
         </div>
@@ -27,7 +27,7 @@ export default function Header() {
             (session ? (
               <ProfileDropdown />
             ) : (
-              <div className="hidden md:flex space-x-2 ml-2">
+              <div className="ml-2 hidden space-x-2 md:flex">
                 <Button asChild variant="ghost" size="sm">
                   <Link href="/sign-in">Sign In</Link>
                 </Button>

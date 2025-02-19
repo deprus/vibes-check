@@ -26,9 +26,9 @@ export default function RootLayout({
       <body className={`${inter.variable} font-inter antialiased`}>
         <Background />
         <Toaster />
-        <div className="flex flex-col min-h-screen">
+        <div className="flex min-h-screen flex-col">
           <Header />
-          <main className="flex-1 flex container">{children}</main>
+          <main className="container flex flex-1">{children}</main>
           <Footer />
         </div>
       </body>

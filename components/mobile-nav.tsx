@@ -31,9 +31,9 @@ export default function MobileNav() {
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="border-r border-border p-6 flex flex-col gap-8"
+        className="border-border flex flex-col gap-8 border-r p-6"
       >
-        <SheetHeader className="p-0 text-center sm:text-left text-lg">
+        <SheetHeader className="p-0 text-center text-lg sm:text-left">
           <SheetTitle>Vibes-check</SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col gap-4">
@@ -43,17 +43,17 @@ export default function MobileNav() {
               href={item.href}
               onClick={() => setIsOpen(false)}
               className={cn(
-                "text-base font-medium transition-colors hover:text-primary p-2 rounded-md",
+                "hover:text-primary rounded-md p-2 text-base font-medium transition-colors",
                 pathname === item.href
                   ? "bg-muted text-primary"
-                  : "text-muted-foreground"
+                  : "text-muted-foreground",
               )}
             >
               {item.label}
             </Link>
           ))}
           {!session && !isPending && (
-            <div className="flex flex-col gap-2 mt-4 pt-4 border-t">
+            <div className="mt-4 flex flex-col gap-2 border-t pt-4">
               <Button asChild variant="outline" size="sm">
                 <Link onClick={() => setIsOpen(false)} href="/sign-in">
                   Sign In

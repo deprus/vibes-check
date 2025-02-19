@@ -26,7 +26,7 @@ export default function ProfileDropdown() {
       toast.error(
         `Failed to sign out: ${
           error instanceof Error ? error.message : "Unknown error"
-        }`
+        }`,
       );
     }
   };
@@ -46,7 +46,7 @@ export default function ProfileDropdown() {
           <DropdownMenuItem asChild>
             <Link
               href="/profile"
-              className="cursor-pointer w-full flex items-center"
+              className="flex w-full cursor-pointer items-center"
             >
               <User className="mr-2 h-4 w-4" />
               <span>Profile</span>
@@ -55,7 +55,7 @@ export default function ProfileDropdown() {
           <DropdownMenuItem asChild>
             <Link
               href="/my-decks"
-              className="cursor-pointer w-full flex items-center"
+              className="flex w-full cursor-pointer items-center"
             >
               <Folder className="mr-2 h-4 w-4" />
               <span>My Decks</span>
@@ -65,7 +65,7 @@ export default function ProfileDropdown() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={handleSignOut}
-          className="cursor-pointer text-destructive"
+          className="text-destructive cursor-pointer"
         >
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
