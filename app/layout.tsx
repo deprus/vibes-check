@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Background from "@/components/background";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "sonner";
 
 const inter = Inter({
@@ -24,13 +25,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-inter antialiased`}>
-        <Background />
-        <Toaster />
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="container flex flex-1">{children}</main>
-          <Footer />
-        </div>
+        <NuqsAdapter>
+          <Background />
+          <Toaster />
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="container flex flex-1">{children}</main>
+            <Footer />
+          </div>
+        </NuqsAdapter>
       </body>
     </html>
   );
