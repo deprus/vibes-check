@@ -1,6 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
+import { Filter } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Sheet,
   SheetContent,
@@ -10,22 +16,17 @@ import {
   SheetTrigger,
   SheetFooter,
 } from "@/components/ui/sheet";
-
-import { Badge } from "@/components/ui/badge";
-import { Filter } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/accordion";
-import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
-import { Checkbox } from "./ui/checkbox";
+} from "@/components/ui/accordion";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import Penguin from "@/components/penguin";
-import { useState } from "react";
 import { CARD_COLORS, CARD_RARITIES } from "@/config/constants";
 
-interface CardsFilterProps {
+type CardsFilterProps = {
   selectedType: string[];
   setSelectedType: (value: string) => void;
   selectedRarity: string[];
@@ -35,7 +36,7 @@ interface CardsFilterProps {
   selectedCost: string[];
   setSelectedCost: (value: string) => void;
   activeFilters: number;
-}
+};
 
 export default function CardsFilter({
   selectedType,

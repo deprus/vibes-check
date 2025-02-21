@@ -120,7 +120,7 @@ export const deckCardsTable = pgTable(
       .references(() => cardsTable.id, { onDelete: "cascade" }),
     quantity: integer("quantity").notNull().default(1),
   },
-  (t) => ({
-    pk: primaryKey({ columns: [t.deckId, t.cardId] }),
-  })
+  (t) => [
+    primaryKey({ columns: [t.deckId, t.cardId] }),
+  ]
 );
