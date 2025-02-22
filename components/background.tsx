@@ -1,6 +1,6 @@
 export default function Background() {
   return (
-    <div className="bg-sidebar absolute inset-0 -z-50">
+    <div className="bg-sidebar fixed inset-0 -z-50">
       <div
         className="absolute inset-0 opacity-40"
         style={{
