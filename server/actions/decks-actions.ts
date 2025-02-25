@@ -9,7 +9,7 @@ import { eq, and } from "drizzle-orm";
 import { headers } from "next/headers";
 
 const DeckSchema = z.object({
-  id: z.number(),
+  id: z.number().optional(),
   name: z.string().min(1, "Name is required"),
   description: z.string().optional(),
   isPublic: z.boolean().default(false),

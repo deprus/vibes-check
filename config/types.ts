@@ -6,16 +6,27 @@ export type Color =
   | "purple"
   | "colorless";
 
-export type CardType = "action" | "penguin" | "rod" | "relic";
+export type Category = "action" | "penguin" | "rod" | "relic";
 
 export type Rarity = "common" | "uncommon" | "rare" | "epic";
 
-export type Card = {
+export type CardType = {
   id: number;
   name: string;
-  type: CardType;
+  category: Category;
   color: Color;
   rarity: Rarity;
   cost: number;
   img: string;
+};
+
+export type Deck = {
+  id: number;
+  name: string;
+  description: string;
+  cards: {
+    card: CardType;
+    count: number;
+  }[];
+  isPublic: boolean;
 };

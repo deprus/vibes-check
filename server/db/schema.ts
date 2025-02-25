@@ -88,7 +88,7 @@ export const verification = pgTable("verification", {
 export const cardsTable = pgTable("cards", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar({ length: 255 }).notNull(),
-  type: cardTypeEnum("type").notNull(),
+  category: cardTypeEnum("type").notNull(),
   color: cardColorEnum("color").notNull(),
   rarity: cardRarityEnum("rarity").notNull(),
   cost: integer().notNull(),
@@ -120,7 +120,5 @@ export const deckCardsTable = pgTable(
       .references(() => cardsTable.id, { onDelete: "cascade" }),
     quantity: integer("quantity").notNull().default(1),
   },
-  (t) => [
-    primaryKey({ columns: [t.deckId, t.cardId] }),
-  ]
+  (t) => [primaryKey({ columns: [t.deckId, t.cardId] })],
 );

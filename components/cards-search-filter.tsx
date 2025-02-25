@@ -14,8 +14,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { backgroundColors } from "@/config/constants";
-import { Card as CardType } from "@/config/types";
+import { CardType } from "@/config/types";
 import CardsFilter from "./cards-filter";
+import { filterCards, getActiveFilterCount, sortCards } from "@/lib/utils";
 
 export default function CardsSearchFilter({ cards }: { cards: CardType[] }) {
   const [searchTerm, setSearchTerm] = useQueryState("search", {
@@ -42,73 +43,17 @@ export default function CardsSearchFilter({ cards }: { cards: CardType[] }) {
   const selectedRarities = selectedRarity ? selectedRarity.split(",") : [];
   const selectedTypes = selectedType ? selectedType.split(",") : [];
 
-  const filteredCards = cards
-    .filter((card) => {
-      const matchesSearch = card.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const matchesType =
-        selectedTypes.length === 0 || selectedTypes.includes(card.type);
-      const matchesRarity =
-        selectedRarities.length === 0 || selectedRarities.includes(card.rarity);
-      const matchesCost =
-        selectedCosts.length === 0 ||
-        selectedCosts.some((cost) => {
-          if (cost === "9+") {
-            return card.cost >= 9;
-          }
-          return card.cost.toString() === cost;
-        });
-      const matchesColor =
-        selectedColors.length === 0 || selectedColors.includes(card.color);
-      return (
-        matchesSearch &&
-        matchesType &&
-        matchesRarity &&
-        matchesCost &&
-        matchesColor
-      );
-    })
-    .sort((a, b) => {
-      switch (sortBy) {
-        case "name-asc":
-          return a.name.localeCompare(b.name);
-        case "name-desc":
-          return b.name.localeCompare(a.name);
-        case "cost-asc":
-          return a.cost - b.cost;
-        case "cost-desc":
-          return b.cost - a.cost;
-        default:
-          return 0;
-      }
-    });
-
-  const getActiveFilterCount = () => {
-    let count = 0;
-    if (searchTerm) count++;
-    if (selectedType) {
-      for (const type of selectedTypes) {
-        if (type) count++;
-      }
-    }
-    if (selectedRarity) {
-      for (const rarity of selectedRarities) {
-        if (rarity) count++;
-      }
-    }
-    if (selectedCost) {
-      for (const cost of selectedCosts) {
-        if (cost) count++;
-      }
-    }
-    if (selectedColor) {
-      for (const color of selectedColors) {
-        if (color) count++;
-      }
-    }
-    return count;
-  };
+  const filteredCards = sortCards(
+    filterCards(
+      cards,
+      searchTerm,
+      selectedTypes,
+      selectedRarities,
+      selectedCosts,
+      selectedColors,
+    ),
+    sortBy,
+  );
 
   return (
     <div className="flex w-full flex-col gap-2 py-8">
@@ -133,7 +78,13 @@ export default function CardsSearchFilter({ cards }: { cards: CardType[] }) {
             setSelectedColor={setSelectedColor}
             selectedCost={selectedCosts}
             setSelectedCost={setSelectedCost}
-            activeFilters={getActiveFilterCount()}
+            activeFilters={getActiveFilterCount(
+              searchTerm,
+              selectedTypes,
+              selectedRarities,
+              selectedCosts,
+              selectedColors,
+            )}
           />
         </div>
       </div>
@@ -200,7 +151,7 @@ export default function CardsSearchFilter({ cards }: { cards: CardType[] }) {
                   <div>
                     <h3 className="font-medium">{card.name}</h3>
                     <p className="text-muted-foreground text-sm">
-                      {card.type} • {card.rarity} • cost: {card.cost}
+                      {card.category} • {card.rarity} • cost: {card.cost}
                     </p>
                   </div>
                 </CardContent>
