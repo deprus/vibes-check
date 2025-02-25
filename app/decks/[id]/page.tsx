@@ -117,7 +117,7 @@ export default async function DeckPage(props: DeckPageProps) {
                       {deckCard.card?.name || "Unknown Card"}
                     </div>
                     <div className="truncate text-sm text-gray-400">
-                      {deckCard.card?.type} • {deckCard.card?.color} •{" "}
+                      {deckCard.card?.category} • {deckCard.card?.color} •{" "}
                       {deckCard.card?.rarity} • Cost: {deckCard.card?.cost}
                     </div>
                   </div>
@@ -156,7 +156,7 @@ export default async function DeckPage(props: DeckPageProps) {
                             {deckCard.card?.name || "Unknown Card"}
                           </div>
                           <div className="text-sm text-gray-300">
-                            {deckCard.card?.type} • {deckCard.card?.rarity}
+                            {deckCard.card?.category} • {deckCard.card?.rarity}
                           </div>
                           <div className="mt-1 text-sm">
                             Cost: {deckCard.card?.cost}
