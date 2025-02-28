@@ -29,7 +29,7 @@ export async function saveDeck(formData: DeckFormData) {
   });
 
   if (!session || !session.user) {
-    throw new Error("You must be logged in to save a deck");
+    return { error: "You must be logged in to save a deck." };
   }
 
   const userId = session.user.id;
@@ -51,9 +51,9 @@ export async function saveDeck(formData: DeckFormData) {
         .limit(1);
 
       if (!existingDeck.length) {
-        throw new Error(
-          "Deck not found or you don't have permission to edit it",
-        );
+        return {
+          error: "Deck not found or you don't have permission to edit it.",
+        };
       }
 
       await db

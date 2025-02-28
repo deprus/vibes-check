@@ -124,15 +124,19 @@ export function useDeckManager(existingDeck?: Deck) {
         description: deckDescription,
         isPublic: isPublic,
       });
-
+      if (result.error) {
+        console.error("Error saving deck:", result.error);
+        toast.error(result.error);
+        setIsSaving(false);
+        return result;
+      }
       setIsSaving(false);
       toast.success("Deck saved successfully");
       return result;
     } catch (error) {
       console.error("Error saving deck:", error);
-      toast.error("Error saving deck: " + (error as Error).message);
+      toast.error("Error saving deck");
       setIsSaving(false);
-      throw error;
     }
   };
 
