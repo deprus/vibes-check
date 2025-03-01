@@ -1,7 +1,9 @@
 import Decks from "@/components/decks";
+import Loading from "@/components/loading";
 import { db } from "@/server/db";
 import { decksTable, user } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
+import { Suspense } from "react";
 
 export default async function DecksPage() {
   const decks = await db
@@ -19,5 +21,9 @@ export default async function DecksPage() {
     .leftJoin(user, eq(decksTable.userId, user.id))
     .where(eq(decksTable.isPublic, true));
 
-  return <Decks decks={decks} />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <Decks decks={decks} />{" "}
+    </Suspense>
+  );
 }
