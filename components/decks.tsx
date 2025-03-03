@@ -36,7 +36,13 @@ type Deck = {
   authorName: string | null;
 };
 
-export default function Decks({ decks }: { decks: Deck[] }) {
+export default function Decks({
+  decks,
+  isMyDecks,
+}: {
+  decks: Deck[];
+  isMyDecks: boolean;
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [localDecks, setLocalDecks] = useState(decks);
   const [isDeletingDeck, setIsDeletingDeck] = useState<number | null>(null);
@@ -70,7 +76,6 @@ export default function Decks({ decks }: { decks: Deck[] }) {
       const result = await deleteDeck(isDeletingDeck);
 
       if (result.success) {
-        // Update local state after successful deletion
         setLocalDecks(localDecks.filter((deck) => deck.id !== isDeletingDeck));
         toast.success("Deck deleted successfully");
       } else {
@@ -94,14 +99,20 @@ export default function Decks({ decks }: { decks: Deck[] }) {
     <div className="mx-auto w-full py-8">
       <div className="mb-6 flex flex-col items-start justify-between md:flex-row">
         <div>
-          <h1 className="text-3xl font-bold">Community Decks</h1>
+          <h1 className="text-3xl font-bold">
+            {isMyDecks ? "My Decks" : "Community Decks"}
+          </h1>
           <p className="text-muted-foreground">
-            Discover decks created by the community
+            {isMyDecks
+              ? "Manage your created decks"
+              : "Discover decks created by the community"}
           </p>
         </div>
         <div className="mt-4 flex gap-2 md:mt-0">
           <Button asChild variant="outline">
-            <Link href="/my-decks">My Decks</Link>
+            <Link href={isMyDecks ? "/decks" : "/my-decks"}>
+              {isMyDecks ? "Community Decks" : "My Decks"}
+            </Link>
           </Button>
           <Button asChild>
             <Link href="/builder">Create Deck</Link>
