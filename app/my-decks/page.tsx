@@ -8,7 +8,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
-export default async function DecksPage() {
+async function DecksContent() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -32,9 +32,13 @@ export default async function DecksPage() {
     .leftJoin(user, eq(decksTable.userId, user.id))
     .where(eq(decksTable.userId, session.user.id));
 
+  return <Decks decks={decks} isMyDecks={true} />;
+}
+
+export default function DecksPage() {
   return (
     <Suspense fallback={<Loading />}>
-      <Decks decks={decks} isMyDecks={true} />
+      <DecksContent />
     </Suspense>
   );
 }
