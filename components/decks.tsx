@@ -38,10 +38,10 @@ type Deck = {
 
 export default function Decks({
   decks,
-  isMyDecks,
+  isMyDecks = false,
 }: {
   decks: Deck[];
-  isMyDecks: boolean;
+  isMyDecks?: boolean;
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [localDecks, setLocalDecks] = useState(decks);
