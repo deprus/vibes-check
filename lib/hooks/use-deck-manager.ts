@@ -13,7 +13,7 @@ export function useDeckManager(existingDeck?: Deck) {
   const [deck, setDeck] = useState<
     Map<string, { card: CardType; count: number }>
   >(() => {
-    if (existingDeck) {
+    if (existingDeck && existingDeck.cards) {
       const initialDeck = new Map<string, { card: CardType; count: number }>();
       existingDeck.cards.forEach(({ card, count }) => {
         initialDeck.set(card.name, { card, count });

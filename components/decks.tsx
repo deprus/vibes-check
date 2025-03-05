@@ -24,17 +24,7 @@ import {
   DialogTitle,
 } from "./ui/dialog";
 import { deleteDeck } from "@/server/actions/decks-actions";
-
-type Deck = {
-  id: number;
-  name: string;
-  description: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-  isPublic: boolean;
-  userId: string;
-  authorName: string | null;
-};
+import { Deck } from "@/config/types";
 
 export default function Decks({
   decks,

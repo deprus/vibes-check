@@ -23,10 +23,23 @@ export type CardType = {
 export type Deck = {
   id: number;
   name: string;
-  description: string;
-  cards: {
+  description: string | null;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  authorName: string | null;
+  cards?: {
     card: CardType;
     count: number;
   }[];
   isPublic: boolean;
+};
+
+export type User = {
+  id: string;
+  name: string | null;
+  email: string;
+  emailVerified: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 };
