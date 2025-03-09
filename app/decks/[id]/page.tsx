@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
-import Loading from "@/components/loading";
 import { DeckInfo } from "@/components/deck/deck-info";
 import { DeckCards } from "@/components/deck/deck-cards";
 
@@ -20,10 +18,8 @@ export default async function DeckPage(props: DeckPageProps) {
 
   return (
     <div className="w-full py-8">
-      <Suspense fallback={<Loading />}>
-        <DeckInfo deckId={deckId} />
-        <DeckCards deckId={deckId} />
-      </Suspense>
+      <DeckInfo deckId={deckId} />
+      <DeckCards deckId={deckId} />
     </div>
   );
 }

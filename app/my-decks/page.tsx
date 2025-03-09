@@ -1,12 +1,10 @@
 import Decks from "@/components/decks";
-import Loading from "@/components/loading";
 import { auth } from "@/lib/auth";
 import { db } from "@/server/db";
 import { decksTable, user } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
 
 async function DecksContent() {
   const session = await auth.api.getSession({
@@ -36,9 +34,5 @@ async function DecksContent() {
 }
 
 export default function DecksPage() {
-  return (
-    <Suspense fallback={<Loading />}>
-      <DecksContent />
-    </Suspense>
-  );
+  return <DecksContent />;
 }
