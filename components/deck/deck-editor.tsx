@@ -48,7 +48,7 @@ export default function DeckEditor({
     <Card>
       <CardHeader>
         <CardTitle>Your Deck</CardTitle>
-        <p className="text-muted-foreground">{getTotalCardCount()}/40 cards</p>
+        <p className="text-muted-foreground">{getTotalCardCount()}/52 cards</p>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="cards">
@@ -126,7 +126,7 @@ export default function DeckEditor({
                               e.stopPropagation();
                               increaseCardCount(cardName);
                             }}
-                            disabled={count >= 4 || getTotalCardCount() >= 40}
+                            disabled={count >= 4 || getTotalCardCount() >= 52}
                           >
                             <span className="font-bold">+</span>
                           </Button>
@@ -164,7 +164,7 @@ export default function DeckEditor({
       <CardFooter className="flex gap-2">
         <Button
           className="flex-1"
-          disabled={getTotalCardCount() !== 40 || isSaving}
+          disabled={getTotalCardCount() !== 52 || isSaving}
           onClick={onSave}
         >
           <Save className="h-4 w-4" />

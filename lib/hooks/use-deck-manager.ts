@@ -34,13 +34,13 @@ export function useDeckManager(existingDeck?: Deck) {
 
   const addCardToDeck = (card: CardType) => {
     const currentCount = getTotalCardCount();
-    if (currentCount >= 40) return;
+    if (currentCount >= 52) return;
 
     const newDeck = new Map(deck);
     const existingCard = newDeck.get(card.name);
 
     if (existingCard) {
-      if (existingCard.count < 4 && currentCount < 40) {
+      if (existingCard.count < 4 && currentCount < 52) {
         newDeck.set(card.name, {
           ...existingCard,
           count: existingCard.count + 1,
@@ -68,7 +68,7 @@ export function useDeckManager(existingDeck?: Deck) {
 
   const increaseCardCount = (cardName: string) => {
     const currentCount = getTotalCardCount();
-    if (currentCount >= 40) return;
+    if (currentCount >= 52) return;
 
     const newDeck = new Map(deck);
     const existingCard = newDeck.get(cardName);

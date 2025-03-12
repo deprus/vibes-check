@@ -23,7 +23,7 @@ export default function CardLibrary({
           <div
             key={card.name}
             className={`group relative cursor-pointer ${
-              getTotalCardCount() >= 40 && !deck.has(card.name)
+              getTotalCardCount() >= 52 && !deck.has(card.name)
                 ? "pointer-events-none opacity-50"
                 : ""
             } ${
