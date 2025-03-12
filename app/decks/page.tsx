@@ -3,6 +3,8 @@ import { db } from "@/server/db";
 import { decksTable, user } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+
 export default async function DecksPage() {
   const decks = await db
     .select({

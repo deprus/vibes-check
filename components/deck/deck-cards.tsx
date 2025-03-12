@@ -63,7 +63,7 @@ export async function DeckCards({ deckId }: { deckId: number }) {
                 </div>
                 <div className="truncate text-sm text-gray-400">
                   {deckCard.card?.category} • {deckCard.card?.color} •{" "}
-                  {deckCard.card?.rarity} • Cost: {deckCard.card?.cost}
+                  {deckCard.card?.rarity} • cost: {deckCard.card?.cost}
                 </div>
               </div>
               <div className="ml-auto shrink-0 rounded bg-black/50 px-2 py-1 text-sm font-medium">
