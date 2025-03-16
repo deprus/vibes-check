@@ -6,6 +6,7 @@ import Footer from "@/components/footer";
 import Background from "@/components/background";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "sonner";
+import { InfoButton } from "@/components/info-button";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,6 +33,7 @@ export default function RootLayout({
             <Header />
             <main className="container flex flex-1">{children}</main>
             <Footer />
+            <InfoButton />
           </div>
         </NuqsAdapter>
       </body>
