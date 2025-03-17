@@ -17,7 +17,7 @@ export default function Home() {
             <Link href="/builder">Start Building</Link>
           </Button>
           <Button asChild variant="outline" size="lg">
-            <Link href="/cards">Browse Cards</Link>
+            <Link href="/decks">Browse Decks</Link>
           </Button>
         </div>
       </div>
