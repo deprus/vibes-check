@@ -22,7 +22,7 @@ export default function Footer() {
             <span className="sr-only">GitHub</span>
           </Link>
           <Link
-            href="https://discord.gg/eqX6sbA5"
+            href="https://discord.gg/E7vJ7VAZQt"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110"
