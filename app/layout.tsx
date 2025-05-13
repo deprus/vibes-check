@@ -25,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-inter antialiased`}>
+      <body
+        className={`${inter.variable} font-inter overflow-y-scroll antialiased`}
+      >
         <NuqsAdapter>
           <Background />
           <Toaster />
