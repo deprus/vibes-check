@@ -39,6 +39,8 @@ export default function Decks({
   const [isDeleting, setIsDeleting] = useState(false);
   const { data: session } = useSession();
 
+  console.log(decks);
+
   const filteredDecks = localDecks.filter(
     (deck) =>
       deck.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

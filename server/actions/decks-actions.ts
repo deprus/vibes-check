@@ -19,6 +19,7 @@ const DeckSchema = z.object({
       quantity: z.number().min(1).max(4),
     }),
   ),
+  colorStats: z.record(z.number()).default({}),
 });
 
 export type DeckFormData = z.infer<typeof DeckSchema>;
@@ -62,6 +63,7 @@ export async function saveDeck(formData: DeckFormData) {
           name: validatedData.name,
           description: validatedData.description,
           isPublic: validatedData.isPublic,
+          colorStats: validatedData.colorStats,
           updatedAt: new Date(),
         })
         .where(eq(decksTable.id, validatedData.id));
@@ -77,6 +79,7 @@ export async function saveDeck(formData: DeckFormData) {
           description: validatedData.description,
           userId,
           isPublic: validatedData.isPublic,
+          colorStats: validatedData.colorStats,
           createdAt: new Date(),
           updatedAt: new Date(),
         })

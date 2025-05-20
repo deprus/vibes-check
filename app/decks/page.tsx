@@ -16,10 +16,17 @@ export default async function DecksPage() {
       isPublic: decksTable.isPublic,
       userId: decksTable.userId,
       authorName: user.name,
+      colorStats: decksTable.colorStats,
     })
     .from(decksTable)
     .leftJoin(user, eq(decksTable.userId, user.id))
-    .where(eq(decksTable.isPublic, true));
+    .where(eq(decksTable.isPublic, true))
+    .then((results) =>
+      results.map((deck) => ({
+        ...deck,
+        colorStats: deck.colorStats as { [color: string]: number },
+      })),
+    );
 
   return <Decks decks={decks} />;
 }

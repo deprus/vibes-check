@@ -108,11 +108,21 @@ export function useDeckManager(existingDeck?: Deck) {
     };
   };
 
+  const getColorStats = () => {
+    const colorStats: { [color: string]: number } = {};
+    deck.forEach(({ card, count }) => {
+      colorStats[card.color] = (colorStats[card.color] || 0) + count;
+    });
+    return colorStats;
+  };
+
   const saveDeck = async () => {
     const deckCards = Array.from(deck.values()).map(({ card, count }) => ({
       cardId: card.id,
       quantity: count,
     }));
+
+    const colorStats = getColorStats();
 
     console.log("Saving deck:", { name: deckName, cards: deckCards });
     setIsSaving(true);
@@ -123,6 +133,7 @@ export function useDeckManager(existingDeck?: Deck) {
         cards: deckCards,
         description: deckDescription,
         isPublic: isPublic,
+        colorStats: colorStats,
       });
       if (result.error) {
         console.error("Error saving deck:", result.error);
@@ -158,5 +169,6 @@ export function useDeckManager(existingDeck?: Deck) {
     getDeckStats,
     saveDeck,
     clearDeck,
+    getColorStats,
   };
 }

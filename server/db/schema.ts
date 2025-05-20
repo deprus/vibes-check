@@ -7,6 +7,7 @@ import {
   boolean,
   serial,
   primaryKey,
+  jsonb,
 } from "drizzle-orm/pg-core";
 import { pgEnum } from "drizzle-orm/pg-core";
 
@@ -107,6 +108,7 @@ export const decksTable = pgTable("decks", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
   isPublic: boolean("is_public").notNull().default(false),
+  colorStats: jsonb("color_stats").default({}).notNull(),
 });
 
 export const deckCardsTable = pgTable(

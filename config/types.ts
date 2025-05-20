@@ -33,6 +33,9 @@ export type Deck = {
     count: number;
   }[];
   isPublic: boolean;
+  colorStats: {
+    [color: string]: number;
+  };
 };
 
 export type User = {
