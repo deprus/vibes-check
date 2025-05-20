@@ -27,12 +27,21 @@ async function DecksContent() {
       isPublic: decksTable.isPublic,
       userId: decksTable.userId,
       authorName: user.name,
+      colorStats: decksTable.colorStats,
     })
     .from(decksTable)
     .leftJoin(user, eq(decksTable.userId, user.id))
     .where(eq(decksTable.userId, session.user.id));
 
-  return <Decks decks={decks} isMyDecks={true} />;
+  return (
+    <Decks
+      decks={decks.map((deck) => ({
+        ...deck,
+        colorStats: deck.colorStats as { [color: string]: number },
+      }))}
+      isMyDecks={true}
+    />
+  );
 }
 
 export default function DecksPage() {

@@ -42,6 +42,7 @@ export default async function EditDeckPage({ params }: EditDeckPageProps) {
       createdAt: decksTable.createdAt,
       updatedAt: decksTable.updatedAt,
       authorName: user.name,
+      colorStats: decksTable.colorStats,
     })
     .from(decksTable)
     .leftJoin(user, eq(decksTable.userId, user.id))
@@ -80,6 +81,7 @@ export default async function EditDeckPage({ params }: EditDeckPageProps) {
         updatedAt: deck.updatedAt,
         authorName: deck.authorName,
         isPublic: deck.isPublic,
+        colorStats: deck.colorStats as { [color: string]: number },
         cards: deckCards
           .filter(
             (

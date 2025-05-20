@@ -42,6 +42,7 @@ type EditDeckState = {
   name: string;
   description: string;
   isPublic: boolean;
+  colorStats: { [color: string]: number };
 };
 
 export default function MyDecks({ decks: initialDecks }: { decks: Deck[] }) {
@@ -104,6 +105,7 @@ export default function MyDecks({ decks: initialDecks }: { decks: Deck[] }) {
         description: editingDeck.description,
         isPublic: editingDeck.isPublic,
         cards: [],
+        colorStats: editingDeck.colorStats,
       });
 
       if (result.success) {

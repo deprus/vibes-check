@@ -5,6 +5,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import ProfileClient from "./profile-client";
+import { Deck } from "@/config/types";
 
 export default async function ProfilePage() {
   const session = await auth.api.getSession({
@@ -24,14 +25,16 @@ export default async function ProfilePage() {
       updatedAt: decksTable.updatedAt,
       isPublic: decksTable.isPublic,
       userId: decksTable.userId,
+      colorStats: decksTable.colorStats,
     })
     .from(decksTable)
     .where(eq(decksTable.userId, session.user.id))
     .orderBy(decksTable.updatedAt)
     .limit(5);
 
-  const mappedDecks = recentDecks.map((deck) => ({
+  const mappedDecks: Deck[] = recentDecks.map((deck) => ({
     ...deck,
+    colorStats: deck.colorStats as { [color: string]: number },
     authorName: session.user.name ?? "Unknown Author",
   }));
 
