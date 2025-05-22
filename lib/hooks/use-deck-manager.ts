@@ -153,6 +153,48 @@ export function useDeckManager(existingDeck?: Deck) {
 
   const clearDeck = () => setDeck(new Map());
 
+  const importDeck = (
+    deckData: { deckName: string; counts: Record<string, number> },
+    allCards: CardType[],
+  ) => {
+    // Clear current deck
+    const newDeck = new Map<string, { card: CardType; count: number }>();
+
+    // Create a map of formatted card names to actual cards for quick lookup
+    const cardMap = new Map<string, CardType>();
+    allCards.forEach((card) => {
+      const formattedName = card.name.replace(/\s+/g, "").replace(/[',!]/g, "");
+      cardMap.set(formattedName, card);
+    });
+
+    let importedCards = 0;
+    const skippedCards: string[] = [];
+
+    // Import cards from the deck code
+    for (const [formattedCardName, count] of Object.entries(deckData.counts)) {
+      const card = cardMap.get(formattedCardName);
+      if (card) {
+        newDeck.set(card.name, { card, count });
+        importedCards += count;
+      } else {
+        skippedCards.push(formattedCardName);
+      }
+    }
+
+    // Update deck state
+    setDeck(newDeck);
+    setDeckName(deckData.deckName);
+
+    // Show feedback
+    if (skippedCards.length > 0) {
+      toast.error(
+        `Imported ${importedCards} cards. Could not find: ${skippedCards.join(", ")}`,
+      );
+    } else {
+      toast.success(`Successfully imported ${importedCards} cards!`);
+    }
+  };
+
   return {
     deck,
     deckName,
@@ -170,5 +212,6 @@ export function useDeckManager(existingDeck?: Deck) {
     saveDeck,
     clearDeck,
     getColorStats,
+    importDeck,
   };
 }

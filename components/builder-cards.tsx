@@ -9,6 +9,7 @@ import { CardType, Deck } from "@/config/types";
 import CardsFilter from "./cards-filter";
 import CardLibrary from "./deck/card-library";
 import SaveDeckDialog from "./deck/save-deck-dialog";
+import { ImportDeckDialog } from "./deck/import-deck-dialog";
 import DeckEditor from "./deck/deck-editor";
 import CardSearch from "./deck/card-search";
 import SortSelect from "./deck/sort-select";
@@ -38,9 +39,11 @@ export default function BuilderCards({
     getDeckStats,
     saveDeck,
     clearDeck,
+    importDeck,
   } = useDeckManager(existingDeck);
 
   const [isSaveDialogOpen, setIsSaveDialogOpen] = useState(false);
+  const [isImportDialogOpen, setIsImportDialogOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useQueryState("search", {
     defaultValue: "",
   });
@@ -86,6 +89,13 @@ export default function BuilderCards({
     }
   };
 
+  const handleImportDeck = (deckData: {
+    deckName: string;
+    counts: Record<string, number>;
+  }) => {
+    importDeck(deckData, cards);
+  };
+
   return (
     <div className="w-full py-8">
       <div className="flex flex-col items-start justify-between md:flex-row">
@@ -102,6 +112,11 @@ export default function BuilderCards({
             onSave={handleSaveDeck}
             isSaving={isSaving}
             isExisting={!!existingDeck}
+          />
+          <ImportDeckDialog
+            open={isImportDialogOpen}
+            onOpenChange={setIsImportDialogOpen}
+            onImport={handleImportDeck}
           />
         </div>
       </div>
@@ -164,6 +179,7 @@ export default function BuilderCards({
             increaseCardCount={increaseCardCount}
             clearDeck={clearDeck}
             onSave={() => setIsSaveDialogOpen(true)}
+            onImport={() => setIsImportDialogOpen(true)}
             isSaving={isSaving}
             isExistingDeck={!!existingDeck}
           />

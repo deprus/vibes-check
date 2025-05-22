@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Save, Trash2 } from "lucide-react";
+import { Save, Trash2, Import } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { CardType } from "@/config/types";
@@ -29,6 +29,7 @@ interface DeckEditorProps {
   increaseCardCount: (cardName: string) => void;
   clearDeck: () => void;
   onSave: () => void;
+  onImport: () => void;
   isSaving: boolean;
   isExistingDeck: boolean;
 }
@@ -41,6 +42,7 @@ export default function DeckEditor({
   increaseCardCount,
   clearDeck,
   onSave,
+  onImport,
   isSaving,
   isExistingDeck,
 }: DeckEditorProps) {
@@ -173,6 +175,10 @@ export default function DeckEditor({
             : isExistingDeck
               ? "Update Deck"
               : "Save Deck"}
+        </Button>
+        <Button className="flex-1" variant="outline" onClick={onImport}>
+          <Import className="h-4 w-4" />
+          Import
         </Button>
         <Button className="flex-1" variant="destructive" onClick={clearDeck}>
           <Trash2 className="h-4 w-4" />
