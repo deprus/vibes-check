@@ -52,9 +52,9 @@ export async function DeckInfo({ deckId }: { deckId: number }) {
 
   return (
     <div className="mb-8">
-      <div className="flex items-center justify-between">
-        <h1 className="mb-2 text-3xl font-bold">{deck.name}</h1>
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col justify-between md:flex-row md:items-center">
+        <h1 className="mb-2 text-xl font-bold md:text-3xl">{deck.name}</h1>
+        <div className="flex gap-2 md:items-center">
           <CopyDeckButton deckName={deck.name} deckCards={deckCards} />
           {isOwner && (
             <Button asChild variant="ghost" size="icon">
